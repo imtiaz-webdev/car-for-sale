@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApexMotors | Modern Pre-Owned & Luxury Cars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#ff5f1f', /* Neon Orange Accent */
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom scrollbar for sleeker look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff5f1f;
+            border-radius: 4px;
+        }
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(255, 95, 31, 0.35);
+        }
+        .glow-effect-lg {
+            box-shadow: 0 0 35px rgba(255, 95, 31, 0.45);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-500"></i> 5604 Allentown Pike, Reading, PA</span>
+                <span class="hidden md:inline-flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-500"></i> Mon-Sat: 9AM - 8PM</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="tel:6109167626" class="hover:text-brand-500 transition-colors flex items-center gap-1.5 font-medium"><i data-lucide="phone" class="w-3.5 h-3.5 text-brand-500"></i> (610) 916-7626</a>
+                <span class="text-slate-700">|</span>
+                <span class="text-brand-500 font-semibold flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Verified Dealer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="bg-brand-500 text-slate-950 p-2.5 rounded-xl font-black text-xl tracking-wider group-hover:scale-105 transition-transform glow-effect">
+                    <i data-lucide="car" class="w-6 h-6 stroke-[2.5]"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white leading-none">APEX<span class="text-brand-500">MOTORS</span></span>
+                    <span class="text-[10px] font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase">Pre-Owned & Luxury</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
+                <a href="#home" class="text-brand-500 transition-colors">Home</a>
+                <a href="#inventory" class="hover:text-brand-500 text-slate-600 dark:text-slate-300 transition-colors">Inventory</a>
+                <a href="#services" class="hover:text-brand-500 text-slate-600 dark:text-slate-300 transition-colors">Services</a>
+                <a href="#calculator" class="hover:text-brand-500 text-slate-600 dark:text-slate-300 transition-colors">Finance Calculator</a>
+                <a href="#contact" class="hover:text-brand-500 text-slate-600 dark:text-slate-300 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Action Buttons & Theme Switcher -->
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" aria-label="Toggle Dark/Light Mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-500 border border-slate-200 dark:border-slate-700 transition-all">
+                    <i id="theme-toggle-dark-icon" data-lucide="moon" class="w-5 h-5 hidden"></i>
+                    <i id="theme-toggle-light-icon" data-lucide="sun" class="w-5 h-5 hidden"></i>
+                </button>
+
+                <!-- Call To Action -->
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg glow-effect active:scale-95">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    <span>Book Test Drive</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="block py-2 text-brand-500 font-semibold">Home</a>
+            <a href="#inventory" class="block py-2 text-slate-600 dark:text-slate-300 font-semibold">Inventory</a>
+            <a href="#services" class="block py-2 text-slate-600 dark:text-slate-300 font-semibold">Services</a>
+            <a href="#calculator" class="block py-2 text-slate-600 dark:text-slate-300 font-semibold">Finance Calculator</a>
+            <a href="#contact" class="block py-2 text-slate-600 dark:text-slate-300 font-semibold">Contact</a>
+            <a href="#contact" class="flex items-center justify-center gap-2 bg-brand-500 text-slate-950 font-bold text-sm px-5 py-3 rounded-xl w-full">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span>Book Test Drive</span>
+            </a>
+        </div>
+    </header>
+
+    <section id="home" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <!-- Background Decorative Elements -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-500/10 dark:bg-brand-500/15 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Hero Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-600 dark:text-brand-500 font-bold text-xs uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                        Premium Vehicle Selection
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1]">
+                        Drive Your Dream Vehicle <span class="text-brand-500 underline decoration-brand-500/30 underline-offset-8">Today</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Experience precision engineering, uncompromised quality, and transparent pricing. Every pre-owned vehicle in our inventory passes a rigorous 150-point inspection.
+                    </p>
+
+                    <!-- Key Selling Points Badges -->
+                    <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        <div class="flex items-center gap-2 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500"></i>
+                            <span>150-Point Certified Inspection</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <i data-lucide="shield" class="w-4 h-4 text-brand-500"></i>
+                            <span>Free Carfax Report Available</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <i data-lucide="zap" class="w-4 h-4 text-brand-500"></i>
+                            <span>Instant Financing Options</span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="pt-4 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                        <a href="#inventory" class="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-base px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-brand-500/25 glow-effect active:scale-95">
+                            <span>Browse Inventory</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#calculator" class="inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-base px-8 py-4 rounded-xl border border-slate-200 dark:border-slate-800 transition-all active:scale-95">
+                            <i data-lucide="calculator" class="w-5 h-5 text-brand-500"></i>
+                            <span>Estimate Payments</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Hero Image / Showcase Visual -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-amber-500 rounded-3xl blur opacity-30 dark:opacity-40"></div>
+                        <div class="relative bg-white dark:bg-slate-900 p-4 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80" alt="Luxury Sports Sedan" class="w-full h-[320px] object-cover rounded-2xl">
+                            
+                            <!-- Floating Info Overlay Card -->
+                            <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
+                                <div>
+                                    <span class="text-xs font-bold text-brand-500 uppercase tracking-wide">Featured Vehicle</span>
+                                    <h4 class="font-bold text-slate-900 dark:text-white text-base">2023 BMW M4 Competition</h4>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">3.0L TwinPower Turbo • 12,400 mi</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs text-slate-500 dark:text-slate-400 block">Offer Price</span>
+                                    <span class="text-xl font-extrabold text-slate-900 dark:text-white">$74,900</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-xl border border-slate-200 dark:border-slate-800 transition-colors">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <i data-lucide="sliders-horizontal" class="w-5 h-5 text-brand-500"></i>
+                <span>Quick Inventory Search</span>
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Search Input -->
+                <div class="relative">
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Make / Model</label>
+                    <div class="relative">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="search-input" placeholder="e.g. BMW, Audi, Tesla..." class="w-full pl-9 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors">
+                    </div>
+                </div>
+
+                <!-- Body Type Filter -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Body Style</label>
+                    <select id="body-filter" class="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors">
+                        <option value="all">All Styles</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Coupe">Coupe</option>
+                        <option value="Electric">Electric / Hybrid</option>
+                    </select>
+                </div>
+
+                <!-- Price Range Filter -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Max Price</label>
+                    <select id="price-filter" class="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors">
+                        <option value="all">Any Price</option>
+                        <option value="25000">Under $25,000</option>
+                        <option value="50000">Under $50,000</option>
+                        <option value="75000">Under $75,000</option>
+                        <option value="100000">Under $100,000</option>
+                    </select>
+                </div>
+
+                <!-- Filter Reset Button -->
+                <div class="flex items-end">
+                    <button id="reset-filters-btn" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        <span>Reset Filters</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="inventory" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+                <span class="text-xs font-extrabold text-brand-500 uppercase tracking-widest">Our Showroom</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Featured Inventory</h2>
+            </div>
+            
+            <div id="results-count" class="text-sm font-semibold text-slate-500 dark:text-slate-400">
+                Showing all available vehicles
+            </div>
+        </div>
+
+        <!-- Dynamic Car List Grid -->
+        <div id="car-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Items injected by JavaScript -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="no-results" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <i data-lucide="car-off" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
+            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">No Vehicles Found</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto mt-1">Try adjusting your filters or search term to find what you are looking for.</p>
+        </div>
+    </section>
+
+    <section id="calculator" class="py-16 bg-slate-100 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-xs font-extrabold text-brand-500 uppercase tracking-widest">Financial Planning</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Auto Loan Payment Calculator</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Calculate your estimated monthly payment quickly with our transparent financing estimator tool. Tailor your down payment and interest rate to fit your budget.
+                    </p>
+                    
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-3 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            <div class="p-1.5 rounded-lg bg-brand-500/10 text-brand-500"><i data-lucide="check" class="w-4 h-4"></i></div>
+                            <span>Competitive Rates starting from 3.99% APR</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            <div class="p-1.5 rounded-lg bg-brand-500/10 text-brand-500"><i data-lucide="check" class="w-4 h-4"></i></div>
+                            <span>Flexible Term Options (24 - 72 Months)</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            <div class="p-1.5 rounded-lg bg-brand-500/10 text-brand-500"><i data-lucide="check" class="w-4 h-4"></i></div>
+                            <span>No Hidden Prepayment Penalties</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator Form Card -->
+                <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-2">Vehicle Price ($)</label>
+                            <input type="number" id="calc-price" value="35000" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-2">Down Payment ($)</label>
+                            <input type="number" id="calc-down" value="5000" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-2">Interest Rate (%)</label>
+                            <input type="number" step="0.1" id="calc-rate" value="5.5" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-2">Loan Term (Months)</label>
+                            <select id="calc-term" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold focus:outline-none focus:border-brand-500">
+                                <option value="36">36 Months</option>
+                                <option value="48">48 Months</option>
+                                <option value="60" selected>60 Months</option>
+                                <option value="72">72 Months</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Calculator Output Display -->
+                    <div class="mt-8 p-6 bg-slate-900 text-white rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800">
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Estimated Monthly Payment</span>
+                            <div id="calc-result" class="text-3xl sm:text-4xl font-extrabold text-brand-500">$573<span class="text-sm font-normal text-slate-400">/mo</span></div>
+                        </div>
+                        <a href="#contact" class="bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold px-6 py-3 rounded-xl transition-colors text-sm w-full sm:w-auto text-center">
+                            Apply for Financing
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-xs font-extrabold text-brand-500 uppercase tracking-widest">Why Choose Us</span>
+            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">Premium Customer Services</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mt-3">We elevate your automotive experience with full-spectrum support before, during, and long after your purchase.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-brand-500/50 transition-all group">
+                <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="award" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Certified Inspection</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Every vehicle undergoes a thorough 150+ point mechanical and safety evaluation before hitting our showroom floor.</p>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-brand-500/50 transition-all group">
+                <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="refresh-cw" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Instant Trade-In Valuation</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Get top market dollar for your current car in less than 15 minutes with our instant appraisal process.</p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-brand-500/50 transition-all group">
+                <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="wrench" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Comprehensive Warranty</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Enjoy peace of mind with included bumper-to-bumper extended warranty packages on select certified vehicles.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-slate-100 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12">
+                
+                <!-- Contact Details -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-extrabold text-brand-500 uppercase tracking-widest">Get In Touch</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">Visit Our Dealership</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">Have questions about a specific car or looking to schedule a test drive? Our team is ready to assist you.</p>
+                    </div>
+
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-brand-500">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Showroom Location</h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">5604 Allentown Pike, Reading, PA 19605</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-brand-500">
+                                <i data-lucide="phone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Call Us Direct</h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">(610) 916-7626</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-brand-500">
+                                <i data-lucide="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Email Support</h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">sales@apexmotors.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
+                    <form id="contact-form" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Full Name *</label>
+                                <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Phone Number *</label>
+                                <input type="tel" required placeholder="(555) 000-0000" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Vehicle of Interest</label>
+                            <select id="vehicle-select" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+                                <option value="General Inquiry">General Inquiry</option>
+                                <!-- Populated dynamically by JS -->
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Your Message</label>
+                            <textarea rows="4" placeholder="Tell us when you'd like to test drive or any specific questions..." class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-sm rounded-xl transition-all glow-effect">
+                            Submit Inquiry
+                        </button>
+
+                        <div id="form-success" class="hidden p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-sm rounded-xl text-center font-semibold">
+                            Thank you! Your message has been received. Our team will contact you shortly.
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 text-sm py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 pb-8 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="bg-brand-500 text-slate-950 p-2 rounded-lg font-black text-lg">
+                        <i data-lucide="car" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-extrabold text-xl tracking-tight text-white">APEX<span class="text-brand-500">MOTORS</span></span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 font-medium text-xs">
+                    <a href="#home" class="hover:text-brand-500 transition-colors">Home</a>
+                    <a href="#inventory" class="hover:text-brand-500 transition-colors">Inventory</a>
+                    <a href="#services" class="hover:text-brand-500 transition-colors">Services</a>
+                    <a href="#calculator" class="hover:text-brand-500 transition-colors">Calculator</a>
+                    <a href="#contact" class="hover:text-brand-500 transition-colors">Contact</a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+                <p>&copy; <span id="copyright-year"></span> ApexMotors Sales Inc. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vehicle Detail Modal -->
+    <div id="car-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 max-w-2xl w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
+            <button id="close-modal-btn" class="absolute top-4 right-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Modal Details injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample Vehicle Dataset
+        const carData = [
+            { id: 1, title: "2023 BMW M4 Competition", price: 74900, type: "Coupe", mileage: 12400, fuel: "Gasoline", image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80", desc: "Clean title, premium executive package, carbon exterior pack, fully loaded with service records." },
+            { id: 2, title: "2022 Porsche 911 Carrera S", price: 118500, type: "Coupe", mileage: 8100, fuel: "Gasoline", image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80", desc: "Sport Chrono package, Sport Exhaust system, Bose Surround sound, 20/21 inch RS Spyder wheels." },
+            { id: 3, title: "2023 Tesla Model S Plaid", price: 82900, type: "Electric", mileage: 6500, fuel: "Electric", image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80", desc: "Tri-motor all wheel drive, Yoke steering wheel, FSD package included, pristine interior condition." },
+            { id: 4, title: "2021 Audi RS Q8 Quattro", price: 89000, type: "SUV", mileage: 22100, fuel: "Gasoline", image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=800&q=80", desc: "Bang & Olufsen 3D Sound, Massage front seats, carbon optic trim package, night vision assistant." },
+            { id: 5, title: "2022 Mercedes-AMG C63 Sedan", price: 62500, type: "Sedan", mileage: 18400, fuel: "Gasoline", image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80", desc: "V8 Biturbo engine, AMG Performance seats, HUD display, driver assistance package." },
+            { id: 6, title: "2023 Range Rover Sport", price: 84900, type: "SUV", mileage: 14200, fuel: "Hybrid", image: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80", desc: "Dynamic SE specification, Meridian sound, air suspension, panoramic sliding sunroof." }
+        ];
+
+        // 1. Theme Switcher Logic (Light/Dark Mode)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        function initTheme() {
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                lightIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                darkIcon.classList.remove('hidden');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            lightIcon.classList.toggle('hidden');
+            darkIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // 2. Render Car Inventory
+        const carGrid = document.getElementById('car-grid');
+        const searchInput = document.getElementById('search-input');
+        const bodyFilter = document.getElementById('body-filter');
+        const priceFilter = document.getElementById('price-filter');
+        const resetBtn = document.getElementById('reset-filters-btn');
+        const resultsCount = document.getElementById('results-count');
+        const noResults = document.getElementById('no-results');
+        const vehicleSelect = document.getElementById('vehicle-select');
+
+        function renderCars() {
+            const query = searchInput.value.toLowerCase().trim();
+            const bodyStyle = bodyFilter.value;
+            const maxPrice = priceFilter.value;
+
+            const filtered = carData.filter(car => {
+                const matchesSearch = car.title.toLowerCase().includes(query);
+                const matchesBody = (bodyStyle === 'all') || (car.type === bodyStyle);
+                const matchesPrice = (maxPrice === 'all') || (car.price <= parseInt(maxPrice));
+                return matchesSearch && matchesBody && matchesPrice;
+            });
+
+            carGrid.innerHTML = '';
+            resultsCount.textContent = `Showing ${filtered.length} of ${carData.length} vehicles`;
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                filtered.forEach(car => {
+                    const card = document.createElement('div');
+                    card.className = "bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-500/50 transition-all duration-300 flex flex-col group";
+                    card.innerHTML = `
+                        <div class="relative overflow-hidden aspect-[16/10]">
+                            <img src="${car.image}" alt="${car.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-brand-500 font-extrabold text-xs px-3 py-1.5 rounded-full border border-brand-500/30">
+                                ${car.type}
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-brand-500 text-slate-950 font-black text-sm px-3.5 py-1.5 rounded-xl glow-effect">
+                                $${car.price.toLocaleString()}
+                            </span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mb-2">${car.title}</h3>
+                            <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 mb-6">
+                                <span class="flex items-center gap-1.5"><i data-lucide="gauge" class="w-4 h-4 text-brand-500"></i> ${car.mileage.toLocaleString()} mi</span>
+                                <span class="flex items-center gap-1.5"><i data-lucide="fuel" class="w-4 h-4 text-brand-500"></i> ${car.fuel}</span>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+                                <button onclick="openCarModal(${car.id})" class="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs rounded-xl transition-colors">
+                                    View Details
+                                </button>
+                                <a href="#contact" onclick="selectCarInForm('${car.title}')" class="py-2.5 px-3 bg-brand-500 hover:bg-brand-600 text-slate-950 rounded-xl transition-colors flex items-center justify-center">
+                                    <i data-lucide="message-square" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    carGrid.appendChild(card);
+                });
+            }
+            lucide.createIcons();
+        }
+
+        // Populate Contact Form Vehicle Dropdown
+        function populateVehicleDropdown() {
+            carData.forEach(car => {
+                const opt = document.createElement('option');
+                opt.value = car.title;
+                opt.textContent = car.title;
+                vehicleSelect.appendChild(opt);
+            });
+        }
+
+        function selectCarInForm(title) {
+            vehicleSelect.value = title;
+        }
+
+        // Search & Filter Event Listeners
+        searchInput.addEventListener('input', renderCars);
+        bodyFilter.addEventListener('change', renderCars);
+        priceFilter.addEventListener('change', renderCars);
+
+        resetBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            bodyFilter.value = 'all';
+            priceFilter.value = 'all';
+            renderCars();
+        });
+
+        // 3. Finance Calculator Logic
+        const priceInput = document.getElementById('calc-price');
+        const downInput = document.getElementById('calc-down');
+        const rateInput = document.getElementById('calc-rate');
+        const termInput = document.getElementById('calc-term');
+        const calcResult = document.getElementById('calc-result');
+
+        function calculatePayment() {
+            const P = Math.max(0, parseFloat(priceInput.value) || 0 - parseFloat(downInput.value) || 0);
+            const annualRate = parseFloat(rateInput.value) || 0;
+            const r = (annualRate / 100) / 12;
+            const n = parseInt(termInput.value) || 60;
+
+            if (P <= 0) {
+                calcResult.innerHTML = "$0<span class='text-sm font-normal text-slate-400'>/mo</span>";
+                return;
+            }
+
+            if (r === 0) {
+                const monthly = P / n;
+                calcResult.innerHTML = `$${Math.round(monthly)}<span class='text-sm font-normal text-slate-400'>/mo</span>`;
+                return;
+            }
+
+            const monthly = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            calcResult.innerHTML = `$${Math.round(monthly)}<span class='text-sm font-normal text-slate-400'>/mo</span>`;
+        }
+
+        [priceInput, downInput, rateInput, termInput].forEach(elem => {
+            elem.addEventListener('input', calculatePayment);
+        });
+
+        // 4. Modal Functions
+        const modal = document.getElementById('car-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        function openCarModal(id) {
+            const car = carData.find(c => c.id === id);
+            if (!car) return;
+
+            modalContent.innerHTML = `
+                <img src="${car.image}" alt="${car.title}" class="w-full h-64 object-cover rounded-2xl mb-6">
+                <span class="text-xs font-bold text-brand-500 uppercase tracking-widest">${car.type}</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">${car.title}</h3>
+                <p class="text-2xl font-black text-brand-500 mt-2">$${car.price.toLocaleString()}</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-4 leading-relaxed">${car.desc}</p>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                    <a href="#contact" onclick="closeCarModal(); selectCarInForm('${car.title}')" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-sm rounded-xl text-center glow-effect">
+                        Schedule Test Drive
+                    </a>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function closeCarModal() {
+            modal.classList.add('hidden');
+        }
+
+        closeModalBtn.addEventListener('click', closeCarModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeCarModal();
+        });
+
+        // 5. Contact Form Submission Handling
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formSuccess.classList.remove('hidden');
+            contactForm.reset();
+            setTimeout(() => {
+                formSuccess.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Mobile Nav Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderCars();
+            populateVehicleDropdown();
+            calculatePayment();
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
